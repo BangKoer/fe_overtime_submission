@@ -1,6 +1,6 @@
 import { Button, Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { FiCalendar, FiClock, FiLock } from "react-icons/fi";
-import getStatusColor from "../../helper/color_status";
+import getStatusColor from "../../../helper/color_status";
 
 function OvertimeRequestDetail({ data, disabled }) {
     return (

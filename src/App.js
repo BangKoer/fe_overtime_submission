@@ -1,16 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/pages/login'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-import OvertimeRequest from './components/pages/overtime_request';
-import OvertimeApproval from './components/pages/overtime_approval';
-import ViewOvertimeApproval from './components/pages/vw_overtime_approval';
-import ViewOvertimeRequest from './components/pages/vw_overtime_request';
-import SidebarLayout from './components/organism/sidebar';
-import OvertimeRequestDetail from './components/pages/overtime_request_detail';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Dashboard from './components/pages/dashboard';
+import ViewOvertimeRequest from './components/pages/overtime_request/vw_overtime_request';
+import ViewOvertimeApproval from './components/pages/overtime_approval/vw_overtime_approval';
+import SidebarLayout from './components/organism/sidebar';
+import Dashboard from './components/pages/dashboard/dashboard';
+import Login from './components/pages/login';
 
 function App() {
   return (

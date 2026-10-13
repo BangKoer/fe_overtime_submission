@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Container, Card, Table, Badge, Button, Row, Modal } from 'react-bootstrap';
 import { FiDelete, FiEdit, FiEdit2, FiEye, FiTrash } from 'react-icons/fi';
-import OvertimeApproval from './overtime_approval';
+// import OvertimeApproval from '../overtime_approval';
 import OvertimeRequest from './overtime_request';
 import OvertimeRequestDetail from './overtime_request_detail';
-import "../../services/overtime_request_service"
-import { dummyOvertimeRequest } from '../../services/overtime_request_service';
-import getStatusColor from '../../helper/color_status';
+import "../../../services/overtime_request_service"
+import { dummyOvertimeRequest } from '../../../services/overtime_request_service';
+import getStatusColor from '../../../helper/color_status';
 
 let ViewOvertimeRequest = () => {
     const [overtimeReq, setOvertimeReq] = useState([]);

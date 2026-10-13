@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Card, Table, Badge, Button, Modal } from 'react-bootstrap';
-import OvertimeRequestDetail from './overtime_request_detail';
-import { dummyOvertimeRequest } from '../../services/overtime_request_service';
+import { dummyOvertimeRequest } from '../../../services/overtime_request_service';
+import OvertimeRequestDetail from '../overtime_request/overtime_request_detail';
 
 function ViewOvertimeApproval() {
     const [showReview, setShowReview] = useState(false);

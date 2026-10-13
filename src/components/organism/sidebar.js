@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Nav, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Dropdown, Navbar } from 'react-bootstrap';
 import { AiFillDashboard } from 'react-icons/ai';
 import { FiHome, FiClock, FiCheckSquare, FiLogOut, FiUser } from 'react-icons/fi';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
@@ -13,8 +13,15 @@ function SidebarLayout() {
         // Locks the root display viewport to the screen boundaries
         <div className="vh-100 bg-light overflow-hidden">
             <Container fluid className="p-0 h-100">
+                {/* <Row>
+                    <Navbar className="bg-dark d-flex flex-column py-2">
+                        <Container>
+                            <Navbar.Brand href="#home" className="fw-bold text-primary fs-5 text-nowrap">Admin Portal</Navbar.Brand>
+                            <Navbar.Toggle />
+                        </Container>
+                    </Navbar>
+                </Row> */}
                 <Row className="g-0 h-100">
-
                     {/* PERMANENT STATIC LEFT SIDEBAR */}
                     <Col
                         className="bg-dark text-white p-3 d-flex flex-column border-end h-100"
@@ -35,7 +42,6 @@ function SidebarLayout() {
                         </div>
 
                         {/* Navigation Menu */}
-                        {/* Navigation Menu */}
                         <Nav className="flex-column flex-grow-1 gap-1">
 
                             {/* 1. DASHBOARD */}
@@ -45,8 +51,8 @@ function SidebarLayout() {
                                         as="div"
                                         active={isActive}
                                         className={`d-flex align-items-center rounded py-2 px-3 transition-all ${isActive
-                                                ? 'bg-primary text-white fw-bold shadow-sm'
-                                                : 'text-white-50 hover-link'
+                                            ? 'bg-primary text-white fw-bold shadow-sm'
+                                            : 'text-white-50 hover-link'
                                             }`}
                                     >
                                         <AiFillDashboard size={18} className="flex-shrink-0" />
@@ -62,8 +68,8 @@ function SidebarLayout() {
                                         as="div"
                                         active={isActive}
                                         className={`d-flex align-items-center rounded py-2 px-3 transition-all ${isActive
-                                                ? 'bg-primary text-white fw-bold shadow-sm'
-                                                : 'text-white-50 hover-link'
+                                            ? 'bg-primary text-white fw-bold shadow-sm'
+                                            : 'text-white-50 hover-link'
                                             }`}
                                     >
                                         <FiClock size={18} className="flex-shrink-0" />
@@ -79,8 +85,8 @@ function SidebarLayout() {
                                         as="div"
                                         active={isActive}
                                         className={`d-flex align-items-center rounded py-2 px-3 transition-all ${isActive
-                                                ? 'bg-primary text-white fw-bold shadow-sm'
-                                                : 'text-white-50 hover-link'
+                                            ? 'bg-primary text-white fw-bold shadow-sm'
+                                            : 'text-white-50 hover-link'
                                             }`}
                                     >
                                         <FiCheckSquare size={18} className="flex-shrink-0" />
@@ -92,7 +98,7 @@ function SidebarLayout() {
 
 
                         {/* Sidebar Footer Area (Profile Dropdown & Metadata) */}
-                        <div className="border-top border-secondary pt-3 mt-auto">
+                        <div className="border-top border-secondary pt-3 mt-auto mb-4">
                             <Dropdown drop="up">
                                 <Dropdown.Toggle
                                     variant="link"
@@ -107,7 +113,7 @@ function SidebarLayout() {
                                     </div>
                                 </Dropdown.Toggle>
 
-                                <Dropdown.Menu variant="dark" className="shadow w-100 mb-2">
+                                <Dropdown.Menu variant="dark" className="shadow w-100">
                                     <Dropdown.Item href="#profile">My Profile</Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item href="#logout" className="text-danger" as={NavLink} to="/login">
