@@ -1,7 +1,8 @@
 import { Badge, Button, ButtonGroup, Card, Col, Container, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { increment, decrement, incrementByAmount } from "../../../features/counter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { overtime_request_service } from "../../../services/overtime_request_service";
 
 let Dashboard = () => {
     const count = useSelector(state => state.counter.value)
@@ -9,8 +10,33 @@ let Dashboard = () => {
 
     const [amount, setAmount] = useState(0);
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await overtime_request_service.getOvertimeRequest();
+                setData(response.data.data || response);
+            } catch (error) {
+                console.error("Failed to fetch overtime requests:", error);
+                setData([]);
+            }
+        };
+
+        fetchData();
+    }, [])
+
     return (
         <>
+            {/* {data && data.map((datum) => {
+                return (
+                    <>
+                        <p>{datum.employee_name}</p>
+                        <p>{datum.department_name}</p>
+                        <br />
+                    </>
+                )
+            })} */}
             {/* KPI's */}
             <Row>
                 <h1>KPI's</h1>

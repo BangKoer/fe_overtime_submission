@@ -1,62 +1,43 @@
-export const dummyOvertimeRequest = [
-    {
-        "req_id": 81,
-        "overtime_date": "2026-08-02",
-        "employee_id": 2,
-        "employee_name": "Jane Smith",
-        "start_time": "17:00:00",
-        "end_time": "20:00:00",
-        "total_hours": 3,
-        "payout": 2150289.0,
-        "reason": "Overtime task #1 - Month-end financial closing",
-        "request_status": "Awaiting Manager Approval (Lv1)"
+import apiClient from "../config/api_client";
+
+export const overtime_request_service = {
+    // Add Overtime Requests
+    addOvertimeRequest: async (data) => {
+        try {
+            const res = await apiClient.post(`api/overtime-request`, data)
+            return res
+        } catch (error) {
+            throw error.response ? error.response.data : error
+        }
     },
-    {
-        "req_id": 82,
-        "overtime_date": "2026-08-02",
-        "employee_id": 2,
-        "employee_name": "Jane Smith 1",
-        "start_time": "17:00:00",
-        "end_time": "20:00:00",
-        "total_hours": 3,
-        "payout": 2150289.0,
-        "reason": "Overtime task #1 - Month-end financial closing",
-        "request_status": "Awaiting Finance Approval (Lv2)"
+    // List of Overtime requests
+    getOvertimeRequest: async () => {
+        try {
+            const res = await apiClient.get(`api/overtime-requests`)
+            return res
+        } catch (error) {
+            throw error.response ? error.response.data : error
+        }
     },
-    {
-        "req_id": 83,
-        "overtime_date": "2026-08-02",
-        "employee_id": 2,
-        "employee_name": "Jane Smith 2",
-        "start_time": "17:00:00",
-        "end_time": "20:00:00",
-        "total_hours": 3,
-        "payout": 2150289.0,
-        "reason": "Overtime task #1 - Month-end financial closing",
-        "request_status": "Awaiting Manager Approval (Lv1)"
+    // List of Overtime request By Employee ID
+    getOvertimeRequestByEmployeeId: async (id) => {
+        try {
+            const res = await apiClient.get(`api/overtime-request/emp/${id}`)
+            return res
+        } catch (error) {
+            console.log("ini error: "+error);
+            throw error.response ? error.response.data : error
+        }
     },
-    {
-        "req_id": 84,
-        "overtime_date": "2026-08-02",
-        "employee_id": 2,
-        "employee_name": "Jane Smith 3",
-        "start_time": "17:00:00",
-        "end_time": "20:00:00",
-        "total_hours": 3,
-        "payout": 2150289.0,
-        "reason": "Overtime task #1 - Month-end financial closing",
-        "request_status": "Rejected"
+
+    // List of Overtime request By Id
+    getOvertimeRequestById: async (id) => {
+        try {
+            const res = await apiClient.get(`api/overtime-request/${id}`)
+            return res
+        } catch (error) {
+            throw error.response ? error.response.data : error
+        }
     },
-    {
-        "req_id": 84,
-        "overtime_date": "2026-08-02",
-        "employee_id": 2,
-        "employee_name": "Jane Smith 3",
-        "start_time": "17:00:00",
-        "end_time": "20:00:00",
-        "total_hours": 3,
-        "payout": 2150289.0,
-        "reason": "Overtime task #1 - Month-end financial closing",
-        "request_status": "Fully Approved"
-    },
-]
+
+}

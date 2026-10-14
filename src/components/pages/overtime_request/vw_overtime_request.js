@@ -5,8 +5,9 @@ import { FiDelete, FiEdit, FiEdit2, FiEye, FiTrash } from 'react-icons/fi';
 import OvertimeRequest from './overtime_request';
 import OvertimeRequestDetail from './overtime_request_detail';
 import "../../../services/overtime_request_service"
-import { dummyOvertimeRequest } from '../../../services/overtime_request_service';
+// import { dummyOvertimeRequest } from '../../../services/overtime_request_service';
 import getStatusColor from '../../../helper/color_status';
+import { dummyOvertimeRequest } from '../../../services/dummy_overtime_data';
 
 let ViewOvertimeRequest = () => {
     const [overtimeReq, setOvertimeReq] = useState([]);

@@ -5,8 +5,8 @@ import { FiHome, FiClock, FiCheckSquare, FiLogOut, FiUser } from 'react-icons/fi
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 function SidebarLayout() {
-    const storageData = localStorage.getItem('user_data');
-    const userData = storageData ? JSON.parse(storageData) : null;
+    // const storageData = localStorage.getItem('user_data');
+    // const userData = storageData ? JSON.parse(storageData) : null;
 
 
     return (
@@ -33,7 +33,7 @@ function SidebarLayout() {
                     >
                         {/* Sidebar Header / Branding */}
                         <div className="d-flex align-items-center mb-4 px-2" style={{ minHeight: '40px' }}>
-                            <span className="fw-bold text-primary fs-5 text-nowrap">{userData.role} Portal</span>
+                            <span className="fw-bold text-primary fs-5 text-nowrap">Employee Portal</span>
                         </div>
 
                         {/* Section Header Label */}
@@ -108,8 +108,8 @@ function SidebarLayout() {
                                         <FiUser size={18} />
                                     </div>
                                     <div className="ms-3 text-nowrap overflow-hidden text-truncate" style={{ maxWidth: '160px' }}>
-                                        <div className="fw-bold small lh-1" style={{ lineHeight: "0.75" }}>{userData.user_name}</div>
-                                        <span className="extra-small" style={{ fontSize: '11px', color: 'white' }}>{userData.role} Portal</span>
+                                        <div className="fw-bold small lh-1" style={{ lineHeight: "0.75" }}>Leon S.Kennedy</div>
+                                        <span className="extra-small" style={{ fontSize: '11px', color: 'white' }}>Employee Portal</span>
                                     </div>
                                 </Dropdown.Toggle>
 
