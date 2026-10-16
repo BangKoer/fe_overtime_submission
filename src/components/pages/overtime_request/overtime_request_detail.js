@@ -1,12 +1,17 @@
 import { Button, Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { FiCalendar, FiClock, FiLock } from "react-icons/fi";
 import getStatusColor from "../../../helper/color_status";
+import currency from "currency.js";
+import currencyFormat from "../../../helper/currency_format";
 
 function OvertimeRequestDetail({ data, disabled }) {
     return (
         <>
             <Card className="w-100 border-0">
                 <Card.Body>
+                    <Row>
+
+                    </Row>
                     <Row>
                         <Col md={2}>
                             <Form.Group className="mb-3" controlId="employeeId">
@@ -47,9 +52,9 @@ function OvertimeRequestDetail({ data, disabled }) {
                                 <Form.Label>Date</Form.Label>
                                 <InputGroup>
                                     <Form.Control type="date" name="date" value={data?.overtime_date || ""} disabled={disabled} required />
-                                    <InputGroup.Text>
+                                    {/* <InputGroup.Text>
                                         <FiCalendar />
-                                    </InputGroup.Text>
+                                    </InputGroup.Text> */}
                                 </InputGroup>
                             </Form.Group>
                         </Col>
@@ -58,9 +63,9 @@ function OvertimeRequestDetail({ data, disabled }) {
                                 <Form.Label>Start Time</Form.Label>
                                 <InputGroup>
                                     <Form.Control type="time" name="start_time" value={data?.start_time || ""} required disabled={disabled} />
-                                    <InputGroup.Text className="bg-light text-muted">
+                                    {/* <InputGroup.Text className="bg-light text-muted">
                                         <FiClock />
-                                    </InputGroup.Text>
+                                    </InputGroup.Text> */}
                                 </InputGroup>
                             </Form.Group>
                         </Col>
@@ -69,9 +74,9 @@ function OvertimeRequestDetail({ data, disabled }) {
                                 <Form.Label>End Time</Form.Label>
                                 <InputGroup>
                                     <Form.Control type="time" name="end_time" value={data?.end_time || ""} required disabled={disabled} />
-                                    <InputGroup.Text>
+                                    {/* <InputGroup.Text>
                                         <FiClock />
-                                    </InputGroup.Text>
+                                    </InputGroup.Text> */}
                                 </InputGroup>
                             </Form.Group>
                         </Col>
@@ -85,7 +90,7 @@ function OvertimeRequestDetail({ data, disabled }) {
 
                     <Form.Group className="mb-3" controlId="payout">
                         <Form.Label>Payout</Form.Label>
-                        <Form.Control type="text" name="payout" value={`Rp${data?.payout || ""}-`} required disabled={disabled} />
+                        <Form.Control type="text" name="payout" value={currencyFormat(data?.overtime_pay)} required disabled={disabled} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="overtimeReason">

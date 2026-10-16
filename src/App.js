@@ -6,6 +6,7 @@ import ViewOvertimeApproval from './components/pages/overtime_approval/vw_overti
 import SidebarLayout from './components/organism/sidebar';
 import Dashboard from './components/pages/dashboard/dashboard';
 import Login from './components/pages/login';
+import ViewHistoryApproval from './components/pages/overtime_approval/vw_approval_history';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path='requests' element={<ViewOvertimeRequest />} />
               <Route path='approvals' element={<ViewOvertimeApproval />} />
+              <Route path='history' element={<ViewHistoryApproval />} />
           </Route>
 
         </Routes>

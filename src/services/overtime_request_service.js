@@ -19,13 +19,14 @@ export const overtime_request_service = {
             throw error.response ? error.response.data : error
         }
     },
+
     // List of Overtime request By Employee ID
     getOvertimeRequestByEmployeeId: async (id) => {
         try {
             const res = await apiClient.get(`api/overtime-request/emp/${id}`)
             return res
         } catch (error) {
-            console.log("ini error: "+error);
+            console.log("ini error: " + error);
             throw error.response ? error.response.data : error
         }
     },
@@ -39,5 +40,35 @@ export const overtime_request_service = {
             throw error.response ? error.response.data : error
         }
     },
+
+    // List of Overtime Request by supervisor Id
+    getOvertimeRequestBySupId: async (id, statusRequest) => {
+        try {
+            const res = await apiClient.get(`api/overtime-request/sup/${id}`, {
+                params: {
+                    status: statusRequest
+                }
+            })
+            return res
+        } catch (error) {
+            throw error.response ? error.response.data : error
+
+        }
+    },
+
+    // List of Overtime Request by status
+    getOvertimeRequestByStatus: async (status) => {
+        try {
+            const res = await apiClient.get(`api/overtime-request/status`, {
+                params: {
+                    status: status
+                }
+            })
+            return res
+        } catch (error) {
+            throw error.response ? error.response.data : error
+            
+        }
+    }
 
 }

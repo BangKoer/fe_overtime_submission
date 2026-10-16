@@ -7,13 +7,36 @@ import OvertimeRequestDetail from './overtime_request_detail';
 import "../../../services/overtime_request_service"
 // import { dummyOvertimeRequest } from '../../../services/overtime_request_service';
 import getStatusColor from '../../../helper/color_status';
-import { dummyOvertimeRequest } from '../../../services/dummy_overtime_data';
+// import { dummyOvertimeRequest } from '../../../services/dummy_overtime_data';
+import { jwtDecode } from 'jwt-decode';
+import { overtime_request_service } from '../../../services/overtime_request_service';
+import { parse, format } from 'date-fns'
+
 
 let ViewOvertimeRequest = () => {
     const [overtimeReq, setOvertimeReq] = useState([]);
 
+
+
     useEffect(() => {
-        setOvertimeReq(dummyOvertimeRequest);
+        // Get token payload
+        const token = localStorage.getItem("token");
+        let decodeToken = {}
+        if (token) {
+            decodeToken = jwtDecode(token)
+        }
+
+        const getEmployeeRequest = async () => {
+            try {
+                let reqData = await overtime_request_service.getOvertimeRequestByEmployeeId(decodeToken.employeeId)
+                setOvertimeReq(reqData.data.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getEmployeeRequest()
+        // setOvertimeReq(dummyOvertimeRequest);
     }, [])
 
     const [show, setShow] = useState(false);
@@ -49,7 +72,7 @@ let ViewOvertimeRequest = () => {
                                     <th>Req ID</th>
                                     <th>Employee</th>
                                     <th>Date / Time</th>
-                                    <th>Hour - Payout</th>
+                                    {/* <th>Hour - Payout</th> */}
                                     <th>Reason</th>
                                     <th>Status</th>
                                     <th className="text-center">Actions</th>
@@ -61,13 +84,13 @@ let ViewOvertimeRequest = () => {
                                     overtimeReq.map(ovr => {
                                         return (
                                             <tr>
-                                                <td><strong>#{ovr.req_id}</strong></td>
+                                                <td><strong>#{ovr.overtime_id}</strong></td>
                                                 <td>
                                                     <strong>{ovr.employee_name}</strong>
                                                     <div className="small text-muted">Emp ID: {ovr.employee_id}</div>
                                                 </td>
-                                                <td>{ovr.overtime_date}<br /><span className="small text-muted">{ovr.start_time} - {ovr.end_time}</span></td>
-                                                <td><strong>{ovr.total_hours} hrs</strong><div className="small text-success">Rp{ovr.payout}</div></td>
+                                                <td>{ovr.overtime_date}<br /><span className="small text-muted">{format(parse(ovr.start_time, 'HH:mm:ss', new Date()), 'hh:mm a')} - {format(parse(ovr.end_time, 'HH:mm:ss', new Date()), 'hh:mm a')}</span></td>
+                                                {/* <td><strong>{ovr.total_hours} hrs</strong><div className="small text-success">Rp{ovr.overtime_pay}</div></td> */}
                                                 <td>{ovr.reason}</td>
                                                 <td>
                                                     <Badge bg={getStatusColor(`${ovr.request_status}`)}>
@@ -76,12 +99,13 @@ let ViewOvertimeRequest = () => {
                                                 </td>
                                                 <td className="text-center">
 
-                                                    <Button className="me-2 pb-2" variant="outline-primary" size="sm" onClick={ () => handleOpenModal(ovr, true) }>
-                                                        <FiEye size={18} className="flex-shrink-0" />
+                                                    <Button className="me-2 pb-2" variant="outline-primary" size="sm" onClick={() => handleOpenModal(ovr, true)}>
+                                                        <FiEye size={18} className="pe-1" />
+                                                        View
                                                     </Button>
-                                                    <Button className=" pb-2" variant="outline-warning" size="sm" onClick={ () => handleOpenModal(ovr, false) }>
+                                                    {/* <Button className=" pb-2" variant="outline-warning" size="sm" onClick={ () => handleOpenModal(ovr, false) }>
                                                         <FiEdit2 size={18} className="flex-shrink-0" />
-                                                    </Button>
+                                                    </Button> */}
 
                                                 </td>
                                             </tr>
@@ -97,7 +121,7 @@ let ViewOvertimeRequest = () => {
             {/* Modal View and Edit */}
             <Modal show={show} onHide={handleClose} size='lg' scrollable={true}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Overtime Request ID #01</Modal.Title>
+                    <Modal.Title>Overtime Request ID #{selectedRequest && selectedRequest.overtime_id}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={{ maxHeight: 'calc(100vh - 210px)', overflowY: 'auto' }}>
                     {selectedRequest && (
@@ -106,9 +130,10 @@ let ViewOvertimeRequest = () => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Submit
+                    <Button variant={isReadOnly ? "danger" : "primary"} onClick={handleClose}>
+                        {isReadOnly ? (<>Close</>) : (<>Submit</>)}
                     </Button>
+
                 </Modal.Footer>
             </Modal>
 
@@ -118,7 +143,7 @@ let ViewOvertimeRequest = () => {
                     <Modal.Title >Overtime Request Form</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <OvertimeRequest></OvertimeRequest>
+                    <OvertimeRequest onClose={handleCloseRequest}></OvertimeRequest>
                 </Modal.Body>
             </Modal>
         </>
